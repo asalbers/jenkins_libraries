@@ -1,7 +1,6 @@
 def call(){
         stage('terraform format checking'){
             steps{
-                echo ''
                 sh ('terraform fmt -check')
             }
         }
