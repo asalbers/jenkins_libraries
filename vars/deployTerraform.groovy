@@ -9,6 +9,17 @@ def tfapply(){
                     '''
                 }
 }
+def tfdestroy(){
+     withCredentials([azureServicePrincipal('azure_id')]) {
+                    sh  '''
+                        export ARM_CLIENT_ID=$AZURE_CLIENT_ID
+                        export ARM_CLIENT_SECRET=$AZURE_CLIENT_SECRET
+                        export ARM_SUBSCRIPTION_ID=$AZURE_SUBSCRIPTION_ID
+                        export ARM_TENANT_ID=$AZURE_TENANT_ID
+                        terraform destroy -auto-approve
+                    '''
+                }
+}
 def tfapplyk8s(){
      withCredentials([azureServicePrincipal('azure_id')]) {
                     sh  '''
