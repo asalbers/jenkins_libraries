@@ -1,32 +1,17 @@
-def call(){
-        stage('terraform format checking'){
-            steps{
-                sh ('terraform fmt -check')
-            }
-        }
-        stage('terraform init') {
-            steps{
-                echo 'validating'
-                sh (
-                    returnStdout: true,
-                    script: "terraform init"
-                )
-            }
+def tffmt(){
+    sh "terraform fmt -check"
+}
+def tfinit(){
+    sh "terraform init"
+}
 
-        }
-        stage('terraform validate') {
-            steps{
-                echo 'validating'
-                sh (
-                    returnStdout: true,
-                    script: "terraform validate"
-                )
-            }
 
-        }
-        stage('terraform plan') {
-            steps{
-                withCredentials([azureServicePrincipal('azure_id')]) {
+def tfvalidate(){
+    sh "terraform validate"
+}
+
+def tfplan(){
+     withCredentials([azureServicePrincipal('azure_id')]) {
                     sh  '''
                         export ARM_CLIENT_ID=$AZURE_CLIENT_ID
                         export ARM_CLIENT_SECRET=$AZURE_CLIENT_SECRET
@@ -35,6 +20,4 @@ def call(){
                         terraform plan
                     '''
                 }
-            }
-        }
 }
