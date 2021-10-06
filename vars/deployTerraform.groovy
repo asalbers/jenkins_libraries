@@ -1,4 +1,3 @@
-#!/usr/bin/env groovy
 def tfapply(){
      withCredentials([azureServicePrincipal('azure_id')]) {
                     sh  '''
