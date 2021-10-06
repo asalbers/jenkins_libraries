@@ -19,6 +19,7 @@ def tfapplyk8s(){
                         export TF_VAR_client_id=$AZURE_CLIENT_ID
                         export TF_VAR_client_secret=$AZURE_CLIENT_SECRET
                         terraform apply -input=false tfplan
+                        terraform destroy -input=false
                     '''
                 }
 }
