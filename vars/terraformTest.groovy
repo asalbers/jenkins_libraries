@@ -5,7 +5,6 @@ def tfinit(){
     sh "terraform init"
 }
 
-
 def tfvalidate(){
     sh "terraform validate"
 }
